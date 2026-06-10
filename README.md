@@ -1,36 +1,82 @@
-# ▶️ YouTube Comment Sentiment Analysis Dashboard
+# YouTube Comment Sentiment Analysis Dashboard
 
-Analyse the sentiment of any YouTube video's comments using a RoBERTa
-transformer model fine-tuned on 124M social media posts.
+A Streamlit-based NLP dashboard that analyses the sentiment of YouTube video comments using a RoBERTa transformer model. The app fetches video metadata and comments through the YouTube Data API v3, classifies each comment as positive, neutral, or negative, and presents the results through interactive visualisations.
 
-**Stack:** Python · Streamlit · HuggingFace Transformers · YouTube Data API v3 · Plotly
+This project is useful for understanding audience reactions, monitoring public feedback, and exploring how sentiment changes across comments on a YouTube video.
 
 ---
 
-## 📁 Project Structure
+## Tech Stack
 
-```
+- **Python**
+- **Streamlit**
+- **Hugging Face Transformers**
+- **RoBERTa sentiment model**
+- **YouTube Data API v3**
+- **Plotly**
+- **WordCloud**
+- **Pandas**
+
+---
+
+## Features
+
+- Fetches YouTube video metadata, including title, channel, thumbnail, views, and likes
+- Collects up to 200 public comments from a YouTube video
+- Performs sentiment classification using a RoBERTa transformer model
+- Displays positive, neutral, and negative sentiment distribution
+- Shows KPI cards for total comments, sentiment percentages, and overall mood
+- Provides interactive visualisations using Plotly
+- Generates a word cloud based on comment text
+- Includes a sortable and filterable comment explorer
+- Allows users to export the analysed results as a CSV file
+
+---
+
+## Project Structure
+
+```text
 youtube_sentiment/
 ├── app.py                  # Main Streamlit dashboard
 ├── youtube_fetcher.py      # YouTube Data API v3 integration
-├── sentiment_engine.py     # HuggingFace RoBERTa sentiment model
-├── visualisations.py       # Plotly charts + WordCloud
-├── requirements.txt        # All dependencies
-├── .env.example            # API key template
-└── README.md
+├── sentiment_engine.py     # RoBERTa sentiment analysis logic
+├── visualisations.py       # Plotly charts and word cloud generation
+├── requirements.txt        # Project dependencies
+├── .env.example            # Example environment variable file
+└── README.md               # Project documentation
 ```
 
 ---
 
-## 🚀 Setup (Step by Step)
+## How the Application Works
 
-### 1. Open the folder in VS Code
-File → Open Folder → select `youtube_sentiment`
+1. The user enters a YouTube video URL.
+2. The application extracts the video ID from the URL.
+3. The YouTube Data API retrieves video metadata and public comments.
+4. Each comment is passed through a RoBERTa sentiment model.
+5. The model returns sentiment probabilities for positive, neutral, and negative classes.
+6. The dashboard visualises the results through KPI cards, charts, tables, and a word cloud.
 
-### 2. Create and activate a virtual environment
+---
+
+## Installation and Setup
+
+### 1. Clone the repository
+
+```bash
+git clone https://github.com/your-username/youtube-sentiment-dashboard.git
+cd youtube-sentiment-dashboard
+```
+
+### 2. Create a virtual environment
+
 ```bash
 python -m venv venv
+```
 
+Activate the environment:
+
+```bash
 # Windows
 venv\Scripts\activate
 
@@ -39,78 +85,105 @@ source venv/bin/activate
 ```
 
 ### 3. Install dependencies
+
 ```bash
 pip install -r requirements.txt
 ```
-> First install is slow (~2 GB for PyTorch). Grab a coffee ☕
 
-### 4. Get a YouTube API key
-1. Go to https://console.cloud.google.com
-2. Create a new project
-3. Go to **APIs & Services → Library**
-4. Search **"YouTube Data API v3"** → Enable
-5. Go to **APIs & Services → Credentials**
-6. Click **"+ Create Credentials → API Key"**
-7. Copy the key
+The first installation may take some time because the transformer and PyTorch-related packages can be large.
 
-### 5. Set up your .env file
+---
+
+## YouTube API Key Setup
+
+This project requires a YouTube Data API v3 key.
+
+1. Go to the Google Cloud Console.
+2. Create a new project or select an existing one.
+3. Open **APIs & Services**.
+4. Enable **YouTube Data API v3**.
+5. Go to **Credentials**.
+6. Create a new API key.
+7. Copy the generated key.
+
+Create a `.env` file from the example file:
+
 ```bash
-# Rename the template
 cp .env.example .env
 ```
-Edit `.env`:
-```
-YOUTUBE_API_KEY=AIza...your_key_here
+
+Add your API key inside `.env`:
+
+```env
+YOUTUBE_API_KEY=your_api_key_here
 ```
 
-### 6. Run the dashboard
+Do not commit your real `.env` file to GitHub.
+
+---
+
+## Run the Application
+
 ```bash
 streamlit run app.py
 ```
-Open **http://localhost:8501** in your browser.
+
+After running the command, open the local Streamlit URL in your browser, usually:
+
+```text
+http://localhost:8501
+```
 
 ---
 
-## 🎛️ Features
+## Example Use Case
 
-| Feature | Description |
-|---|---|
-| **Video card** | Shows thumbnail, title, channel, views, likes |
-| **5 KPI cards** | Total, Positive %, Neutral %, Negative %, Overall mood |
-| **Donut chart** | Sentiment distribution |
-| **Time series** | Sentiment scores over time |
-| **Histogram** | Confidence score distribution |
-| **Scatter plot** | Comment likes vs sentiment confidence |
-| **Top comments bar** | Most liked comments coloured by sentiment |
-| **Word cloud** | Common words filtered by sentiment |
-| **Comment explorer** | Sortable, filterable comment browser |
-| **CSV export** | Download results |
+A user can paste a YouTube video URL into the dashboard to analyse how viewers reacted to the video. The dashboard then shows the overall sentiment distribution, the most liked comments, confidence scores, and common words appearing in the comment section.
 
 ---
 
-## 🧠 How It Works
+## Environment Variables
 
-1. User pastes a YouTube video URL
-2. Video ID is extracted from the URL
-3. YouTube Data API fetches metadata + up to 200 comments
-4. Each comment is tokenised and passed through RoBERTa
-5. Model outputs probability scores for Positive / Neutral / Negative
-6. Results are visualised across 6 different charts
+Create a `.env` file with the following variable:
 
----
+```env
+YOUTUBE_API_KEY=your_api_key_here
+```
 
-## 📈 CV Tips
-
-- Deploy free on **Streamlit Community Cloud** (streamlit.io/cloud)
-- Mention: *"Built NLP dashboard analysing YouTube comment sentiment using RoBERTa transformer; fetched 200 comments per video via YouTube Data API v3 and visualised results across 6 interactive charts"*
-- Highlight model choice justification: RoBERTa over VADER for better accuracy on informal, emoji-heavy social media text
+The `.env.example` file should be committed to GitHub, but the real `.env` file should be ignored using `.gitignore`.
 
 ---
 
-## 🔧 Possible Extensions
+## Recommended `.gitignore`
 
-- [ ] Compare sentiment across multiple videos side by side
-- [ ] Detect sarcasm layer on top of base sentiment
-- [ ] Topic modelling (LDA) to find what people are positive/negative about
-- [ ] Reply thread sentiment analysis
-- [ ] Scheduled monitoring — alert when sentiment drops suddenly
+```gitignore
+venv/
+__pycache__/
+*.pyc
+.env
+.streamlit/secrets.toml
+.DS_Store
+```
+
+---
+
+## Possible Improvements
+
+- Compare sentiment across multiple YouTube videos
+- Add topic modelling to identify common discussion themes
+- Analyse sentiment in reply threads
+- Add scheduled monitoring for changes in audience sentiment
+- Deploy the dashboard on Streamlit Community Cloud
+- Add support for multilingual sentiment analysis
+
+---
+
+## Project Summary for Resume
+
+Built an NLP dashboard that analyses YouTube comment sentiment using a RoBERTa transformer model. Integrated the YouTube Data API v3 to fetch video metadata and comments, processed comments through a Hugging Face sentiment pipeline, and visualised results through interactive Streamlit and Plotly components.
+
+---
+
+## License
+
+This project is for educational and portfolio purposes. Add a license file if you plan to make the repository open source.
