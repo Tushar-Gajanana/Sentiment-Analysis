@@ -165,22 +165,7 @@ __pycache__/
 .DS_Store
 ```
 
----
 
-## Possible Improvements
-
-- Compare sentiment across multiple YouTube videos
-- Add topic modelling to identify common discussion themes
-- Analyse sentiment in reply threads
-- Add scheduled monitoring for changes in audience sentiment
-- Deploy the dashboard on Streamlit Community Cloud
-- Add support for multilingual sentiment analysis
-
----
-
-## Project Summary for Resume
-
-Built an NLP dashboard that analyses YouTube comment sentiment using a RoBERTa transformer model. Integrated the YouTube Data API v3 to fetch video metadata and comments, processed comments through a Hugging Face sentiment pipeline, and visualised results through interactive Streamlit and Plotly components.
 
 ---
 
