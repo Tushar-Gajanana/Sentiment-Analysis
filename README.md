@@ -372,14 +372,3 @@ Some YouTube videos have comments disabled. In that case, the app cannot fetch c
 - Add sarcasm detection for social media comments
 - Add authentication for private dashboards
 
----
-
-## Project Summary for Resume
-
-Built an interactive NLP dashboard that analyses YouTube comment sentiment using a RoBERTa transformer model. Integrated the YouTube Data API v3 to fetch video metadata and comments, processed comments through a Hugging Face model, and visualised audience reactions using Streamlit, Plotly, KPI cards, word clouds, and CSV export functionality.
-
----
-
-## License
-
-This project is for educational and portfolio purposes. Add a license file if you plan to make the repository open source.
