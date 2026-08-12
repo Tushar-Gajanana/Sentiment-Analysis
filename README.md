@@ -4,6 +4,8 @@ A Streamlit-based NLP dashboard that analyses the sentiment of YouTube video com
 
 This project is useful for understanding audience reactions, monitoring public feedback, and exploring how sentiment changes across comments on a YouTube video.
 
+
+Link: https://r8mxoazhbbqwnv5ibvy4gh.streamlit.app/
 ---
 
 ## Demo
